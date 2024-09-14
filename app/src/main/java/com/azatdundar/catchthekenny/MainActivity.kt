@@ -78,7 +78,10 @@ class MainActivity : AppCompatActivity() {
             override fun onFinish() {
                 // Yes or no is gonna become here
                 score = 0
+                handler.removeCallbacks(runnable)
+                makeImagesInvisible()
                 showRestartDialog()
+
             }
 
         }.start()
@@ -135,6 +138,7 @@ class MainActivity : AppCompatActivity() {
 
     fun showRestartDialog(){
 
+
         val alertDialog = AlertDialog.Builder(this)
 
         alertDialog.setTitle("Game Over!")
@@ -143,7 +147,9 @@ class MainActivity : AppCompatActivity() {
         alertDialog.setPositiveButton("Yes"){dialog, id->
 
             binding.scoreText.text = "Score: ${score}"
-            countDownTimer.start()
+            val intent = intent
+            finish()
+            startActivity(intent)
 
 
         }
